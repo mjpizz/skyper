@@ -30,7 +30,7 @@ skyper call echo123
 
 > **Note for Mac OSX**
 > You may be prompted for your Administrator password. This happens when
-> activating OSX Accessibility options for auto-accepting calls.
+> activating OSX Accessibility options for auto-confirming calls.
 
 Specify more than one participant:
 
@@ -56,7 +56,7 @@ skyper.call(["echo123"]);
 
 > **Note for Mac OSX**
 > You may be prompted for your Administrator password. This happens when
-> activating OSX Accessibility options for auto-accepting calls.
+> activating OSX Accessibility options for auto-confirming calls.
 
 Specify more than one participant, as well as advanced arguments like
 topic and enabling video:
@@ -69,7 +69,7 @@ skyper.call(["echo123", "skype.test.user.1"], {
 });
 ```
 
-Give a callback if you want to know about issues starting or accepting the call:
+Give a callback if you want to know about issues starting or confirming the call:
 
 ```javascript
 var skyper = require("skyper");
