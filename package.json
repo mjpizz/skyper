@@ -1,0 +1,38 @@
+{
+
+  "name": "skyper",
+  "version": "0.0.1",
+  "description": "autoinitiate Skype calls and chats using Skype URIs",
+
+  "keywords": [
+    "skype",
+    "tools"
+  ],
+
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/mjpizz/skyper.git"
+  },
+
+  "main": "lib/index.js",
+
+  "bin": {
+    "skyper": "./bin/skyper"
+  },
+
+  "dependencies": {
+
+    "open": "0.x",
+    "applescript": "0.x",
+    "optimist": "0.x"
+
+  },
+
+  "license": "MIT",
+
+  "author": {
+    "name": "Matt Pizzimenti",
+    "url": "http://mjpizz.com"
+  }
+
+}
