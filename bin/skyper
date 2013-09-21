@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+var optimist = require("optimist");
+var skyper = require("../lib");
+
+if (module === require.main) {
+
+  optimist.usage("Usage: $0 {call|chat} user1,user2,... [--topic topic] [--video]");
+
+  // Parse arguments.
+  var argv = optimist.argv;
+  var action = argv._[0];
+  var participantsString = argv._[1];
+  var topic = argv.t;
+  var video = argv.v ? true : false;
+
+  // Handle -h helpt output.
+  if (argv.h) {
+    console.error(optimist.help());
+    process.exit(0);
+  }
+
+  // Validate arguments.
+  if (!skyper[action] || !participantsString) {
+    console.error(optimist.help());
+    process.exit(1);
+  }
+
+  // Call skyper library and echo any errors.
+  var participants = participantsString.split(",");
+  console.log("Starting", action, "with", participants.join(" + "));
+  skyper[action](participants, {topic: topic, video: video}, function(err) {
+    if (err) {
+      console.error(err.stack);
+      process.exit(1);
+    }
+  });
+
+}
