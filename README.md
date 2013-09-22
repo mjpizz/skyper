@@ -94,11 +94,24 @@ var skyper = require("skyper");
 skyper.api.send("CALL echo123");
 ```
 
-You can also listen for notifications from Skype:
+You can also listen for events from Skype:
 
 ```javascript
+var skyper = require("skyper");
+
+// When sending your command to Skype...
+skyper.api.on("command", function(body) {
+  console.log(">>>", body)
+});
+
+// When Skype acknowledges your command...
+skyper.api.on("reply", function(body) {
+  console.log("<<<", body)
+});
+
+// When other events happen in Skype (incoming call, buddy online, etc)...
 skyper.api.on("notification", function(body) {
-  console.log("Got notification from Skype:", body);
+  console.log("---", body)
 });
 ```
 
