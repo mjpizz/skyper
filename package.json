@@ -35,6 +35,9 @@
 
   "virtualenv": {
     "version": "1.10.1",
+    "flags": [
+      "--system-site-packages"
+    ],
     "dependencies": [
       "Skype4Py==1.0.35"
     ]
