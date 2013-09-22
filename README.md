@@ -14,13 +14,13 @@ If you want the commandline tool, install globally using npm:
 sudo npm install skyper -g
 ```
 
-If you just want the node library:
+If you just want the node module:
 
 ```bash
 npm install skyper
 ```
 
-## Commandline Examples
+## Commandline examples
 
 On the commandline, make a test call to Skype's echo bot:
 
@@ -45,7 +45,7 @@ skyper -h
 Usage: skyper {call|chat} user1,user2,... [--topic topic] [--video]
 ```
 
-## API Examples
+## node examples
 
 Using the node module, make a test call to Skype's echo bot:
 
@@ -77,6 +77,28 @@ skyper.call(["echo123", "skype.test.user.1"], {}, function(err) {
   if (err) {
     console.error("Oh no! Something happenend", err);
   }
+});
+```
+
+### node API examples
+
+When Python is available, skyper offers raw Skype API access via
+[Skype4Py](https://pypi.python.org/pypi/Skype4Py/). All dependencies are
+installed into a virtualenv in node_modules during `npm install`, so your
+environment remains untouched.
+
+You can send a [Skype API command](http://vmiklos.hu/bitlbee-skype/public_api_ref.html) like this:
+
+```javascript
+var skyper = require("skyper");
+skyper.api.send("CALL echo123");
+```
+
+You can also listen for notifications from Skype:
+
+```javascript
+skyper.api.on("notification", function(body) {
+  console.log("Got notification from Skype:", body);
 });
 ```
 
