@@ -24,8 +24,24 @@
 
     "open": "0.x",
     "applescript": "0.x",
-    "optimist": "0.x"
+    "optimist": "0.x",
 
+    "request": "2.x",
+    "rimraf": "2.x",
+    "tar": "0.x",
+    "zlib": "1.x"
+
+  },
+
+  "virtualenv": {
+    "version": "1.10.1",
+    "dependencies": [
+      "Skype4Py==1.0.35"
+    ]
+  },
+
+  "scripts": {
+    "postinstall": "bin/postinstall"
   },
 
   "license": "MIT",
