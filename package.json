@@ -40,7 +40,7 @@
   },
 
   "scripts": {
-    "postinstall": "./node_modules/.bin/virtualenv-postinstall"
+    "postinstall": "./node_modules/.bin/virtualenv-postinstall --optional"
   },
 
   "license": "MIT",
