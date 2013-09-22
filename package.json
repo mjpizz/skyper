@@ -25,11 +25,7 @@
     "open": "0.x",
     "applescript": "0.x",
     "optimist": "0.x",
-
-    "request": "2.x",
-    "rimraf": "2.x",
-    "tar": "0.x",
-    "zlib": "1.x"
+    "virtualenv": "0.x"
 
   },
 
@@ -44,7 +40,7 @@
   },
 
   "scripts": {
-    "postinstall": "bin/postinstall"
+    "postinstall": "./node_modules/.bin/virtualenv-postinstall"
   },
 
   "license": "MIT",
