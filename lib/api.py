@@ -1,51 +1,69 @@
 import sys, time, json
-from Skype4Py import Skype
+from Skype4Py import Skype, apiAttachAvailable
 from Skype4Py.api import Command
 
-# Events are passed to the parent over stdout.
-def send_event(type, payload):
-    skype._Api.acquire()
-    try:
-        print json.dumps({"type": type, "payload": payload})
-        sys.stdout.flush()
-    finally:
-        skype._Api.release()
 
-# Capture calls to _CallEventHandler and pass them as events
-# to the parent process.
-def NewCallEventHander(event, *args, **kwargs):
+class Api(object):
 
-    if event == "Notify":
-        body = args[0]
-        send_event("notification", body)
+    def __init__(self, protocol):
 
-    elif event == "Command":
-        command = args[0]
-        send_event("command", command.Command)
+        self.__protocol = protocol
+        self.__skype = Skype(Events=self)
+        self.__skype.Attach(Protocol=self.__protocol)
+        self.__command_counter = 0
 
-    elif event == "Reply":
-        command = args[0]
-        send_event("reply", command.Reply)
+    # Commands are sent with a constantly increasing ID.
+    def send_command(self, text):
+        self.__command_counter += 1
+        self.__skype.SendCommand(Command(text.strip(), Id=self.__command_counter))
 
-    # TODO: look a bit closer at the Skype4Py API to see if this is useful
-    # elif event == "AttachmentStatus":
-    #     status = args[0]
-    #     send_event("attachment", status)
+    # Reattach to Skype if necessary.
+    def AttachmentStatus(self, status):
+        if status == apiAttachAvailable:
+            self.__skype.Attach(Protocol=self.__protocol)
 
-    return OriginalCallEventHandler(event, *args, **kwargs)
+    # Events are passed through to the parent process.
+    def Notify(self, body):
+        self.__send_event_to_parent("notification", body)
 
-skype = Skype()
-OriginalCallEventHandler = skype._CallEventHandler
-skype._CallEventHandler = NewCallEventHander
+    def Command(self, command):
+        self.__send_event_to_parent("command", {
+            "id": command.Id,
+            "command": command.Command,
+            })
 
-# Get the protocol version from the commandline args.
-skype.Attach(Protocol=int(sys.argv[1]))
+    def Reply(self, command):
+        self.__send_event_to_parent("reply", {
+            "id": command.Id,
+            "command": command.Command,
+            "reply": command.Reply,
+            })
 
-# Loop forever, accepting commands over stdin and running
-# them against our Skype4Py client.
+    # Events are passed to the parent over stdout. Acquire/release the
+    # internal lock to keep output threadsafe.
+    def __send_event_to_parent(self, type, payload):
+        self.__acquire_lock()
+        try:
+            print json.dumps({"type": type, "payload": payload})
+            sys.stdout.flush()
+        finally:
+            self.__release_lock()
+
+    # HACK: to keep things threadsafe, we need to use the internal
+    # lock that the rest of Skype4Py uses.
+    def __acquire_lock(self):
+        self.__skype._Api.acquire()
+
+    def __release_lock(self):
+        self.__skype._Api.release()
+
+
+# Get the protocol version from the commandline args. Then loop forever,
+# accepting commands over stdin and running them against our Skype4Py client.
+api = Api(protocol=int(sys.argv[1]))
 while True:
     command = sys.stdin.readline()
     if command:
-        skype.SendCommand(Command(command.strip()))
+        api.send_command(command)
     else:
         time.sleep(0.1)
