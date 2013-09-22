@@ -3,8 +3,12 @@
 Skyper is a commandline tool and node library for autostarting local Skype
 calls using [Skype URIs](https://dev.skype.com/skype-uri/uri-main).
 
-On Mac OSX, it uses Applescript to confirm the call. On other OSes
-you will need to confirm manually.
+On Mac OSX, Applescript is used to confirm the call. On other OSes
+you will need to confirm manually (patches welcome!).
+
+Raw [Desktop API](https://support.skype.com/en/faq/FA214/what-is-the-desktop-api)
+access is available via `skyper.api`, though Microsoft will be gradually
+discontinuing portions of this API over time.
 
 ## Installation
 
@@ -63,6 +67,7 @@ topic and enabling video:
 
 ```javascript
 var skyper = require("skyper");
+
 skyper.call(["echo123", "skype.test.user.1"], {
   topic: "Hello world", // Note: in some cases, Skype does not modify the topic.
   video: true
@@ -73,6 +78,7 @@ Give a callback if you want to know about issues starting or confirming the call
 
 ```javascript
 var skyper = require("skyper");
+
 skyper.call(["echo123", "skype.test.user.1"], {}, function(err) {
   if (err) {
     console.error("Oh no! Something happenend", err);
@@ -80,17 +86,22 @@ skyper.call(["echo123", "skype.test.user.1"], {}, function(err) {
 });
 ```
 
-### node API examples
+### Desktop API examples
 
-When Python is available, skyper offers raw Skype API access via
-[Skype4Py](https://pypi.python.org/pypi/Skype4Py/). All dependencies are
-installed into a virtualenv in node_modules during `npm install`, so your
-environment remains untouched.
+When Python is available, `skyper.api` exposes the Skype Desktop API via
+[Skype4Py](https://pypi.python.org/pypi/Skype4Py/). All Python dependencies
+install into a local virtualenv during `npm install`, which keeps them isolated
+from the rest of the system.
+
+> **Note for Linux**
+> You may need to install the dbus and gobject libraries for Python separately.
+> You can do this with `sudo apt-get install python-dbus python-gobject`
 
 You can send a [Skype API command](http://vmiklos.hu/bitlbee-skype/public_api_ref.html) like this:
 
 ```javascript
 var skyper = require("skyper");
+
 skyper.api.send("CALL echo123");
 ```
 
