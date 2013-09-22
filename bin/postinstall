@@ -11,7 +11,7 @@ env.download(function(err) {
     if (err) throw err;
     env.install(function(err) {
       if (err) throw err;
-      console.log("Successfully installed Python helpers.");
+      console.log("Successfully installed Python helpers. On Ubuntu, you may need to 'sudo apt-get install python-dbus python-gobject'.");
     });
   });
 });
