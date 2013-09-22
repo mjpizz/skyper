@@ -1,8 +1,8 @@
 {
 
   "name": "skyper",
-  "version": "0.0.3",
-  "description": "autoinitiate Skype calls and chats using Skype URIs",
+  "version": "0.0.4",
+  "description": "automated Skype calls and chats using Skype URIs and Desktop API",
 
   "keywords": [
     "skype",
