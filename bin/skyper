@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var optimist = require("optimist");
-var skyper = require("../lib");
+var skyper = require("../lib/skyper");
 
 if (module === require.main) {
 

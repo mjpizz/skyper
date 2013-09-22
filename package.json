@@ -14,7 +14,7 @@
       "url": "https://github.com/mjpizz/skyper.git"
   },
 
-  "main": "lib/index.js",
+  "main": "lib/skyper.js",
 
   "bin": {
     "skyper": "./bin/skyper"
