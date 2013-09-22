@@ -100,18 +100,18 @@ You can also listen for events from Skype:
 var skyper = require("skyper");
 
 // When sending your command to Skype...
-skyper.api.on("command", function(body) {
-  console.log(">>>", body)
+skyper.api.on("command", function(event) {
+  console.log(">>>", event)
 });
 
 // When Skype acknowledges your command...
-skyper.api.on("reply", function(body) {
-  console.log("<<<", body)
+skyper.api.on("reply", function(event) {
+  console.log("<<<", event)
 });
 
 // When other events happen in Skype (incoming call, buddy online, etc)...
-skyper.api.on("notification", function(body) {
-  console.log("---", body)
+skyper.api.on("notification", function(event) {
+  console.log("---", event)
 });
 ```
 
