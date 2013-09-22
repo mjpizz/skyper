@@ -25,7 +25,8 @@
     "open": "0.x",
     "applescript": "0.x",
     "optimist": "0.x",
-    "virtualenv": "0.x"
+    "virtualenv": "0.x",
+    "color": "0.x"
 
   },
 

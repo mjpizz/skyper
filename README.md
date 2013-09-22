@@ -126,6 +126,32 @@ skyper.api.on("notification", function(event) {
 });
 ```
 
+## Desktop API REPL (experimental)
+
+If you want to experiment with Skype's Desktop API and watch Skype events live,
+you can fire up a REPL by executing skyper with no arguments:
+
+```
+skyper
+##########################################
+ Welcome to the experimental Skyper REPL!
+##########################################
+--- CONNSTATUS ONLINE
+>>> {"command":"PROTOCOL 8","id":0}
+--- CURRENTUSERHANDLE mjpizz
+--- USERSTATUS ONLINE
+<<< {"reply":"PROTOCOL 8","command":"PROTOCOL 8","id":0}
+>
+```
+
+You can also launch the REPL via the node API:
+
+```javascript
+var skyper = require("skyper");
+
+skyper.api.startRepl();
+```
+
 ## Contributing
 
 Just make a pull request :) In particular, it'd be great to support auto-confirm
