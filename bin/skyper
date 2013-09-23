@@ -22,10 +22,11 @@ if (module === require.main) {
 
   // Run the console when no other arguments were given.
   if (!action && !participantsString && !topic && !video) {
-    console.log("##########################################");
-    console.log(" Welcome to the experimental Skyper REPL! ");
-    console.log("##########################################");
-    skyper.api.startRepl().on("exit", function() {
+    console.log("######################################################");
+    console.log(" Welcome to the Skyper REPL (experimental)            ");
+    console.log(" http://mjpizz.github.io/skyper/desktop-api-reference ")
+    console.log("######################################################");
+    skyper.desktop.startRepl().on("exit", function() {
       process.exit(0);
     });
 

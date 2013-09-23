@@ -3,7 +3,7 @@ from Skype4Py import Skype, apiAttachAvailable
 from Skype4Py.api import Command
 
 
-class Api(object):
+class Desktop(object):
 
     def __init__(self, protocol):
 
@@ -60,10 +60,10 @@ class Api(object):
 
 # Get the protocol version from the commandline args. Then loop forever,
 # accepting commands over stdin and running them against our Skype4Py client.
-api = Api(protocol=int(sys.argv[1]))
+desktop = Desktop(protocol=int(sys.argv[1]))
 while True:
     command = sys.stdin.readline()
     if command:
-        api.send_command(command)
+        desktop.send_command(command)
     else:
         time.sleep(0.1)
