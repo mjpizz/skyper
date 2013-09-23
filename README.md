@@ -24,6 +24,13 @@ If you just want the node module:
 npm install skyper
 ```
 
+**Linux users:** if you want to use the Desktop API, you may also need to
+install the Python dbus and gobject modules. For example, on Ubuntu:
+
+```bash
+sudo apt-get install python-dbus python-gobject
+```
+
 ## Commandline examples
 
 On the commandline, make a test call to Skype's echo bot:
