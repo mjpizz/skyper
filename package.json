@@ -1,7 +1,7 @@
 {
 
   "name": "skyper",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "automated Skype calls and chats using Skype URIs and Desktop API",
 
   "keywords": [
