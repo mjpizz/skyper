@@ -133,14 +133,15 @@ you can fire up a REPL by executing skyper with no arguments:
 
 ```
 skyper
-##########################################
- Welcome to the experimental Skyper REPL!
-##########################################
---- CONNSTATUS ONLINE
->>> {"command":"PROTOCOL 8","id":0}
---- CURRENTUSERHANDLE mjpizz
---- USERSTATUS ONLINE
-<<< {"reply":"PROTOCOL 8","command":"PROTOCOL 8","id":0}
+######################################################
+ Welcome to the Skyper REPL (experimental)
+ http://mjpizz.github.io/skyper/desktop-api-reference
+######################################################
+<- CONNSTATUS ONLINE
+-> #0 PROTOCOL 8
+<- CURRENTUSERHANDLE mjpizz
+<- USERSTATUS ONLINE
+<- #0 PROTOCOL 8
 >
 ```
 
