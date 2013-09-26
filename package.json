@@ -25,23 +25,20 @@
     "open": "0.x",
     "applescript": "0.x",
     "optimist": "0.x",
-    "virtualenv": "0.x",
-    "color": "0.x"
+    "virtualenv": "0.1.x",
+    "cli-color": "0.x"
 
   },
 
   "virtualenv": {
-    "version": "1.10.1",
+    "optional": true,
     "flags": [
       "--system-site-packages"
-    ],
-    "dependencies": [
-      "Skype4Py==1.0.35"
     ]
   },
 
   "scripts": {
-    "postinstall": "./node_modules/.bin/virtualenv-postinstall --optional"
+    "postinstall": "virtualenv-postinstall"
   },
 
   "license": "MIT",
